@@ -1,0 +1,1685 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>[MEGA ACTUALIZACION + MEGALODON]Los campos de Batallas Universales</title>
+  <!-- Estilos CSS para el modal -->
+  <style>
+    /* Estilos para el modal */
+    .modal {
+      display: none;
+      /* Ocultar el modal por defecto */
+      position: fixed;
+      /* Posición fija */
+      z-index: 1;
+      /* Indice z alto para que esté encima de todo */
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      /* Habilitar el desplazamiento */
+      background-color: rgba(0, 128, 255, 0.9);
+      /* Fondo azul claro oceánico con opacidad del 90% */
+      padding-top: 60px;
+      /* Espaciado arriba */
+    }
+
+    /* Estilos para el contenido del modal */
+    .modal-content {
+      background-color: #fefefe;
+      /* Fondo blanco */
+      margin: 5% auto;
+      /* Margen arriba y abajo, centrado horizontalmente */
+      padding: 20px;
+      border: none;
+      /* Eliminar borde */
+      border-radius: 10px;
+      /* Bordes redondeados */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      /* Sombra suave */
+      width: 80%;
+      /* Ancho del contenido del modal */
+    }
+
+
+    /* Estilos para el botón de cerrar */
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+
+    /* Estilos para el modal del evento */
+    .modal-content-evento {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .contenido-evento {
+      display: flex;
+      align-items: center;
+    }
+
+    .texto-evento {
+      text-align: center;
+      margin-right: 20px;
+      /* Espacio entre el texto y la imagen */
+    }
+
+    .imagen-evento img {
+      max-width: 100%;
+      /* Asegurar que la imagen no supere el ancho del contenedor */
+      height: auto;
+    }
+
+        /* Estilos para el panel de saldo */
+    .panel-saldo {
+      background-color: #ff6b6b;
+      /* Color de fondo */
+      color: #fff;
+      /* Color del texto */
+      padding: 20px;
+      text-align: center;
+      margin-top: 20px;
+      border-radius: 10px;
+      /* Bordes redondeados */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      /* Sombra */
+    }
+
+    /* Estilos adicionales para resaltar el texto */
+    .panel-saldo h2 {
+      font-size: 24px;
+      /* Tamaño del texto */
+      margin-bottom: 10px;
+      /* Espaciado inferior */
+      text-transform: uppercase;
+      /* Convertir texto a mayúsculas */
+    }
+
+    .panel-saldo p {
+      font-size: 18px;
+      /* Tamaño del texto */
+      margin-bottom: 0;
+      /* Eliminar espacio inferior */
+    }
+
+    /* Estilos para el botón */
+    .panel-saldo button {
+      background-color: #fff;
+      /* Color de fondo */
+      color: #ff6b6b;
+      /* Color del texto */
+      border: none;
+      /* Sin borde */
+      padding: 10px 20px;
+      /* Espaciado interno */
+      font-size: 16px;
+      /* Tamaño del texto */
+      border-radius: 5px;
+      /* Bordes redondeados */
+      cursor: pointer;
+      /* Cambiar cursor al pasar por encima */
+      transition: background-color 0.3s, color 0.3s;
+      /* Transición suave */
+    }
+
+    .panel-saldo button:hover {
+      background-color: #ff9494;
+      /* Color de fondo al pasar el mouse */
+      color: #fff;
+      /* Color del texto al pasar el mouse */
+    }
+
+    /* Estilos para el modal */
+    .modal {
+      display: none;
+      /* Ocultar el modal por defecto */
+      position: fixed;
+      /* Posición fija */
+      z-index: 1;
+      /* Indice z alto para que esté encima de todo */
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      /* Habilitar el desplazamiento */
+      background-color: rgba(0, 128, 255, 0.9);
+      /* Fondo azul claro oceánico con opacidad del 90% */
+      padding-top: 60px;
+      /* Espaciado arriba */
+    }
+
+    /* Estilos para el contenido del modal */
+    .modal-content {
+      background-color: #fefefe;
+      /* Fondo blanco */
+      margin: 5% auto;
+      /* Margen arriba y abajo, centrado horizontalmente */
+      padding: 20px;
+      border: none;
+      /* Eliminar borde */
+      border-radius: 10px;
+      /* Bordes redondeados */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      /* Sombra suave */
+      width: 80%;
+      /* Ancho del contenido del modal */
+    }
+
+
+    /* Estilos para el título del modal */
+    .modal-content h2 {
+      font-size: 24px;
+      color: #333;
+      /* Color del texto */
+    }
+
+    /* Estilos para el texto del modal */
+    .modal-content p {
+      font-size: 18px;
+      color: #555;
+      /* Color del texto */
+    }
+
+    /* Estilos para la barra de recarga */
+    .barra-recarga {
+      width: 100%;
+      background-color: #4ba3c7;
+      /* Cambia el color de fondo de la barra de recarga */
+      border-radius: 5px;
+      /* Añade bordes redondeados */
+      height: 20px;
+      /* Reduce la altura de la barra para que se vea más estilizada */
+      margin-top: 20px;
+      overflow: hidden;
+      /* Oculta el contenido que se desborda de la barra */
+    }
+
+    .recarga {
+      width: 50%;
+      /* Cambia el ancho de la barra de recarga para mostrar el progreso */
+      height: 100%;
+      background-color: #00bcd4;
+      /* Cambia el color de la barra de recarga */
+      border-radius: 5px;
+      /* Añade bordes redondeados */
+      transition: width 0.5s ease;
+      /* Añade una transición suave al cambiar el ancho */
+    }
+
+    /* Estilos para los botones del tutorial */
+    .tutorial-btn {
+      display: none;
+      /* Inicialmente ocultos */
+    }
+
+    /* Estilos para los encabezados de los eventos */
+    .evento {
+      margin-top: 20px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 5px;
+    }
+
+    /* Estilos para bloquear el cierre del modal */
+    .bloquear-cierre .close {
+      display: none;
+    }
+
+    /* Estilos para los botones de habilidades */
+    .skill-button {
+      background-color: #ff6b6b;
+      /* Color de fondo */
+      color: #fff;
+      /* Color del texto */
+      border: none;
+      /* Sin borde */
+      padding: 10px 20px;
+      /* Espaciado interno */
+      font-size: 16px;
+      /* Tamaño del texto */
+      border-radius: 5px;
+      /* Bordes redondeados */
+      cursor: pointer;
+      /* Cambiar cursor al pasar por encima */
+      transition: background-color 0.3s, color 0.3s;
+      /* Transición suave */
+      margin: 5px;
+      /* Margen entre botones */
+    }
+
+    .skill-button:hover {
+      background-color: #ff9494;
+      /* Color de fondo al pasar el mouse */
+    }
+
+    /* Estilo específico para el botón de Habilidad 4 */
+    #habilidad4Button {
+      background-color: #6b6bff;
+      /* Color de fondo diferente */
+    }
+
+    /* Estilos para los cubos */
+    .cubo {
+      width: 100px;
+      height: 50px;
+      background-color: gray;
+      display: inline-block;
+      margin: 10px;
+      cursor: pointer;
+    }
+
+    /* Estilos para las imágenes dentro de los cubos */
+    .imagen {
+      display: none;
+      /* Las imágenes están ocultas al principio */
+      max-width: 100%;
+      max-height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Contenedor principal -->
+  <div id="app">
+
+    <!-- Modal de mensajes -->
+    <div id="modalMensajes" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('modalMensajes')">&times;</span>
+        <h2>Mensajes</h2>
+        <div id="mensajesContainer">
+          <!-- Aquí se mostrarán los mensajes -->
+        </div>
+        <input type="text" id="mensajeInput" placeholder="Escribe tu mensaje">
+        <select id="tipoMensaje">
+          <option value="normal">Normal</option>
+          <option value="recompensa">Recompensa</option>
+        </select>
+        <input type="number" id="cantidadRecompensa" placeholder="Cantidad de recompensa">
+        <button onclick="crearMensajeRecompensa()">Enviar</button>
+        <button id="reclamarRecompensaBtn" onclick="reclamarRecompensa()">Reclamar Recompensa</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Aquí incluiremos el script JavaScript -->
+  <script>
+    // Variables para el seguimiento de los mensajes enviados por semana y el saldo de Monedas Trueno
+var mensajesEnviadosEstaSemana = 0;
+var saldoMonedasTrueno = 100; // Supongamos que el jugador tiene 100 Monedas Trueno inicialmente
+
+// Función para abrir el modal de mensajes
+function abrirModalMensajes() {
+  // Verificar si se ha alcanzado el límite de mensajes enviados por semana
+  if (mensajesEnviadosEstaSemana >= 3) {
+    alert('Has alcanzado el límite de mensajes enviados por esta semana.');
+    return;
+  }
+
+  openModal('modalMensajes');
+}
+
+// Función para crear un mensaje de recompensa
+function crearMensajeRecompensa() {
+  var mensaje = document.getElementById('mensajeInput').value;
+  var tipoMensaje = document.getElementById('tipoMensaje').value;
+  var cantidadRecompensa = document.getElementById('cantidadRecompensa').value;
+
+  // Verificar si se ha alcanzado el límite de mensajes enviados por semana
+  if (mensajesEnviadosEstaSemana >= 3) {
+    alert('Has alcanzado el límite de mensajes enviados por esta semana.');
+    return;
+  }
+
+  // Verificar si la cantidad de Monedas Trueno es válida (entre 0 y 25)
+  if (cantidadRecompensa < 0 || cantidadRecompensa > 25) {
+    alert('La cantidad de Monedas Trueno debe estar entre 0 y 25.');
+    return;
+  }
+
+  // Verificar si el jugador tiene suficientes Monedas Trueno para enviar el mensaje
+  if (cantidadRecompensa > saldoMonedasTrueno) {
+    alert('No tienes suficientes Monedas Trueno para enviar este mensaje.');
+    return;
+  }
+
+  // Agregar distintivo de mensaje no reclamado si es un mensaje de recompensa
+  if (tipoMensaje === 'recompensa') {
+    mensaje += ' !'; // Añade un signo de exclamación al mensaje para indicar que no ha sido reclamado
+  }
+
+  // Aquí podrías enviar el mensaje a algún servicio de mensajería o base de datos
+
+  // Actualizar el saldo de Monedas Trueno del jugador
+  saldoMonedasTrueno -= parseInt(cantidadRecompensa);
+
+  // Actualizar el contenido del modal de mensajes
+  var mensajesContainer = document.getElementById('mensajesContainer');
+  mensajesContainer.innerHTML += '<div><p>' + mensaje + '</p>';
+  
+  // Si es un mensaje de recompensa, agrega el botón de reclamar recompensa
+  if (tipoMensaje === 'recompensa') {
+    mensajesContainer.innerHTML += '<button onclick="reclamarRecompensa()">Reclamar Recompensa</button>';
+  }
+
+  mensajesContainer.innerHTML += '</div>';
+
+  // Incrementar el contador de mensajes enviados esta semana
+  mensajesEnviadosEstaSemana++;
+
+  // Cerrar el modal de mensajes
+  closeModal('modalMensajes');
+}
+
+// Event listener para crear un mensaje de recompensa al presionar la tecla "Q"
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'q' || event.key === 'Q') {
+    abrirModalMensajes();
+  }
+});
+
+// Función para reclamar la recompensa
+function reclamarRecompensa() {
+  // Simula la entrega de la recompensa (en este caso, aumenta el saldo de Monedas Trueno)
+  var cantidadRecompensa = document.getElementById('cantidadRecompensa').value;
+  saldoMonedasTrueno += parseInt(cantidadRecompensa);
+
+  // Actualiza el saldo de Monedas Trueno en el panel de saldo
+  document.getElementById('saldoMonedasTrueno').innerText = saldoMonedasTrueno + ' Monedas Trueno';
+
+  // Deshabilita el botón de reclamar recompensa para evitar reclamaciones múltiples
+  event.target.disabled = true;
+}
+
+  </script>
+
+  
+  
+
+  <!-- Botón para acceder al Modal Superior -->
+  <button onclick="openModal('modalSuperior')">Acceder al Modal General</button>
+  <!-- Botón para abrir el panel de saldo -->
+  <button onclick="mostrarPanelSaldo()">Ver Saldo</button>
+
+  <!-- Botón para iniciar el proceso -->
+  <button onclick="iniciarGanarMonedas()">Quiero ganar Monedas Trueno</button>
+  <button onclick="openModal('modalPremium')">Premium</button>
+  <!-- Contenedor para mostrar el tiempo de espera -->
+  <div id="tiempoEspera" style="display: none;">
+    <p>Espera <span id="contadorTiempo"></span> segundos para ganar <span id="monedasGanadas"></span> Monedas Trueno.
+    </p>
+  </div>
+
+  <script>
+    // Función para iniciar el proceso de ganar Monedas Trueno
+  function iniciarGanarMonedas() {
+    const confirmacion = confirm("¿Quieres ganar más Monedas Trueno?");
+
+    if (confirmacion) {
+      const tiempoAleatorio = generarTiempoAleatorio(); // Generar tiempo aleatorio en segundos
+      const monedasAleatorias = generarMonedasAleatorias(); // Generar cantidad de Monedas Trueno aleatorias
+      
+      document.getElementById('tiempoEspera').style.display = "block"; // Mostrar el contenedor de tiempo de espera
+      document.getElementById('contadorTiempo').innerText = tiempoAleatorio; // Mostrar el tiempo de espera
+
+      // Iniciar contador de tiempo de espera
+      setTimeout(function() {
+        document.getElementById('tiempoEspera').style.display = "none"; // Ocultar el contenedor de tiempo de espera después del tiempo aleatorio
+        recompensarMonedasTrueno(monedasAleatorias); // Llamar a la función para recompensar con Monedas Trueno
+      }, tiempoAleatorio * 1000); // Multiplicar por 1000 para convertir segundos a milisegundos
+    }
+  }
+
+  // Función para recompensar al jugador con monedas trueno después del tiempo de espera
+  function recompensarMonedasTrueno(cantidad) {
+    // Sumar la cantidad de Monedas Trueno al saldo actual
+    var saldoActual = parseInt(document.getElementById('saldoMonedasTrueno').innerText);
+    var nuevoSaldo = saldoActual + cantidad;
+
+    // Actualizar el elemento HTML que muestra el saldo de Monedas Trueno
+    document.getElementById('saldoMonedasTrueno').innerText = nuevoSaldo + ' Monedas Trueno';
+
+    // Mostrar mensaje de Monedas Trueno ganadas
+    alert("¡Has ganado " + cantidad + " Monedas Trueno!");
+  }
+
+  // Función para generar tiempo aleatorio en segundos (entre 30 y 180 segundos)
+  function generarTiempoAleatorio() {
+    return Math.floor(Math.random() * (180 - 30 + 1) + 30);
+  }
+
+  // Función para generar cantidad de Monedas Trueno aleatorias (entre 100 y 500 Monedas Trueno)
+  function generarMonedasAleatorias() {
+    return Math.floor(Math.random() * (500 - 100 + 1) + 100);
+  }
+  </script>
+
+  <!-- Modal Premium -->
+  <div id="modalPremium" class="modal1">
+    <!-- Contenido del modal -->
+    <div class="modal-content">
+      <!-- Botón de cierre -->
+      <span class="close" onclick="closeModal('modalPremium')">&times;</span>
+      <!-- Título del modal -->
+      <h2>Premium</h2>
+      <!-- Estado del Premium -->
+      <p>Estado: <span id="estadoPremium">No comprado</span></p>
+      <!-- Descripción del Premium -->
+      <p>Con Premium, desbloquea funciones exclusivas:</p>
+      <button id="btnPremium" onclick="comprarPremium()">Comprar Premium</button>
+      <hr>
+      <!-- Botones de funciones Premium -->
+      <button id="btnTitulos" onclick="accederFuncionPremium('Titulos')">Titulos</button>
+      <button id="btnDescuentos" onclick="accederFuncionPremium('Descuentos')">Descuentos</button>
+      <button id="btnPersonajesPremium" onclick="accederFuncionPremium('Personajes Premium')">Personajes Premium</button>
+      <button id="btnPersonajesAnimales" onclick="accederFuncionPremium('Personajes Animales')">Personajes Animales</button>
+    </div>
+  </div>
+
+  <script>
+    // Variable para almacenar el estado del Premium
+var estadoPremium = "No comprado";
+
+// Función para acceder a las funciones Premium
+function accederFuncionPremium(funcion) {
+  if (estadoPremium === "Renovado" || estadoPremium === "Falta Renovacion") {
+    if (funcionDisponible(funcion)) {
+      // Acceso a la función Premium
+      alert("¡Has accedido a la función " + funcion + "!");
+    } else {
+      alert("Puedes acceder a " + funcion + ", pero la función aún no está disponible.");
+    }
+  } else {
+    alert("Para acceder a las funciones Premium, necesitas comprar Premium primero.");
+  }
+}
+
+// Función para verificar si una función Premium está disponible
+function funcionDisponible(funcion) {
+  // Aquí puedes implementar la lógica para verificar si la función está disponible
+  // Por ejemplo, puedes tener un objeto que mapee las funciones disponibles
+  // y comprobar si la función solicitada está en ese objeto
+  // Por ahora, devolveremos true para simular que todas las funciones están disponibles
+  return true;
+}
+
+// Función para comprar el Premium
+function comprarPremium() {
+  console.log("Se ha hecho clic en el botón de comprar Premium."); // Verificar si se ejecuta la función al hacer clic en el botón
+  
+  // Verificar si el elemento con el ID 'saldoMonedasTrueno' existe en el documento
+  var saldoElement = document.getElementById('saldoMonedasTrueno');
+  if (!saldoElement) {
+    console.error("Elemento 'saldoMonedasTrueno' no encontrado en el documento.");
+    return; // Salir de la función si el elemento no existe
+  }
+  
+  // Verificar si hay suficientes Monedas en el saldo
+  var precioPremium = 399; // Precio del Premium por mes
+  var saldoActual = parseInt(saldoElement.innerText);
+  
+  if (saldoActual >= precioPremium) {
+    // Restar el precio del Premium del saldo
+    var nuevoSaldo = saldoActual - precioPremium;
+    saldoElement.innerText = nuevoSaldo + ' Monedas Trueno';
+    
+    // Cambiar el estado del Premium a Renovado
+    estadoPremium = "Renovado";
+    document.getElementById('estadoPremium').innerText = estadoPremium;
+    
+    alert("¡Has comprado el Premium! Ahora puedes disfrutar de todas las funciones exclusivas.");
+  } else {
+    alert("No tienes suficientes Monedas Trueno en tu saldo. Recarga Monedas para comprar el Premium.");
+  }
+}
+
+
+// Función para renovar el Premium
+function renovarPremium() {
+  if (estadoPremium === "Falta Renovacion") {
+    comprarPremium(); // Renovar el Premium es igual a comprarlo nuevamente
+  } else {
+    alert("Aún no es necesario renovar el Premium.");
+  }
+}
+
+// Función para verificar la renovación del Premium cada mes
+setInterval(function() {
+  // Obtener la fecha actual
+  var fechaActual = new Date();
+  
+  // Obtener la fecha de compra del Premium (puedes almacenarla donde sea adecuado)
+  // Por ahora, vamos a simular que se compró el Premium el 1 de mayo de 2024
+  var fechaCompraPremium = new Date(2024, 4, 1); // Meses en JavaScript comienzan desde 0
+  
+  // Obtener el mes actual y el mes de la compra del Premium
+  var mesActual = fechaActual.getMonth();
+  var mesCompraPremium = fechaCompraPremium.getMonth();
+  
+  // Comparar si ha pasado un mes desde la compra del Premium
+  if (mesActual > mesCompraPremium) {
+    // Verificar si el jugador tiene suficiente saldo para renovar el Premium
+    if (estadoPremium === "Renovado" || estadoPremium === "Falta Renovacion") {
+      var precioPremium = 399; // Precio del Premium por mes
+      var saldoActual = parseInt(document.getElementById('saldoMonedasTrueno').innerText);
+      
+      if (saldoActual >= precioPremium) {
+        // Cambiar el estado del Premium a Falta Renovacion
+        estadoPremium = "Falta Renovacion";
+        document.getElementById('estadoPremium').innerText = estadoPremium;
+        
+        // Mostrar mensaje para renovar el Premium
+        alert("¡Ha pasado un mes! Renueva tu Premium para seguir disfrutando de todas las funciones exclusivas.");
+      } else {
+        alert("¡Ha pasado un mes, pero no tienes suficientes Monedas Trueno para renovar el Premium! Recarga Monedas para seguir disfrutando de las funciones exclusivas.");
+      }
+    }
+  }
+}, 60000); // Verificar cada 1 minuto (60000 milisegundos)
+
+  </script>
+
+  <!-- Panel de saldo -->
+  <div id="panelSaldo" class="panel-saldo" style="display: none;">
+    <h2>Saldo de Monedas Trueno</h2>
+    <p id="saldoMonedasTrueno">0 Monedas Trueno</p>
+    <!-- Botón para mostrar anuncio -->
+    <button onclick="mostrarAnuncio()">Ver anuncio</button>
+  </div>
+
+  <!-- Modal 1 -->
+  <div id="modalAnuncio1" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modalAnuncio1')">&times;</span>
+      <h2>Anuncio 1</h2>
+      <p>¡Este es el anuncio número 1!</p>
+      <hr>
+      <p>Recibirás tu recompensa después del Anuncio</p>
+    </div>
+  </div>
+
+  <!-- Modal 2 -->
+  <div id="modalAnuncio2" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modalAnuncio2')">&times;</span>
+      <h2>Anuncio 2</h2>
+      <p>¡Este es el anuncio número 2!</p>
+      <hr>
+      <p>Recibirás tu recompensa después del Anuncio</p>
+    </div>
+  </div>
+
+  <!-- Modal 3 -->
+  <div id="modalAnuncio3" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modalAnuncio3')">&times;</span>
+      <h2>Anuncio 3</h2>
+      <p>¡Este es el anuncio número 3!</p>
+      <hr>
+      <p>Recibirás tu recompensa después del Anuncio</p>
+    </div>
+  </div>
+
+  <!-- Modal 4 -->
+  <div id="modalAnuncio4" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modalAnuncio4')">&times;</span>
+      <h2>Anuncio 4</h2>
+      <p>¡Este es el anuncio número 4!</p>
+      <hr>
+      <p>Recibirás tu recompensa después del Anuncio</p>
+    </div>
+  </div>
+
+  <!-- Modal 5 -->
+  <div id="modalAnuncio5" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modalAnuncio5')">&times;</span>
+      <h2>Anuncio 5</h2>
+      <p>¡Este es el anuncio número 5!</p>
+      <hr>
+      <p>Recibirás tu recompensa después del Anuncio</p>
+    </div>
+  </div>
+
+  <!-- JavaScript para manejar el panel de saldo -->
+  <script>
+    // Función para mostrar el saldo automáticamente al cargar la página
+window.onload = function() {
+  mostrarSaldo();
+};
+
+// Función para mostrar el saldo
+function mostrarSaldo() {
+  var panelSaldo = document.getElementById('panelSaldo');
+  panelSaldo.style.display = 'block';
+}
+
+// Función para mostrar un anuncio aleatorio
+function mostrarAnuncio() {
+  // Generar un número aleatorio entre 1 y 5
+  var numeroModal = Math.floor(Math.random() * 5) + 1;
+
+  // Construir el ID del modal basado en el número aleatorio
+  var modalId = 'modalAnuncio' + numeroModal;
+
+  // Mostrar el modal correspondiente
+  var modal = document.getElementById(modalId);
+  modal.style.display = 'block';
+
+  // Bloquear el cierre manual del modal
+  modal.classList.add('bloquear-cierre');
+
+  // Iniciar el temporizador para cerrar automáticamente después de 30 segundos
+  setTimeout(function() {
+    closeModal(modalId);
+    recompensarMonedasTrueno();
+  }, 30000); // 30 segundos
+}
+
+// Función para cerrar un modal
+function closeModal(modalId) {
+  var modal = document.getElementById(modalId);
+  modal.style.display = 'none';
+}
+
+// Función para recompensar al jugador con monedas trueno después de ver el anuncio
+function recompensarMonedasTrueno() {
+  // Generar un número aleatorio entre 1 y 100 como recompensa
+  var recompensa = Math.floor(Math.random() * 100) + 1;
+
+  // Sumar la recompensa al saldo actual de monedas trueno
+  var saldoActual = parseInt(document.getElementById('saldoMonedasTrueno').innerText);
+  var nuevoSaldo = saldoActual + recompensa;
+
+  // Actualizar el elemento HTML que muestra el saldo de Monedas Trueno
+  document.getElementById('saldoMonedasTrueno').innerText = nuevoSaldo + ' Monedas Trueno';
+}
+
+// Función para mostrar el panel de saldo
+function mostrarPanelSaldo() {
+  var panelSaldo = document.getElementById('panelSaldo');
+  panelSaldo.style.display = 'block';
+}
+
+  </script>
+
+  <!-- Modal superior -->
+  <div id="modalSuperior" class="modal">
+    <!-- Contenido del modal -->
+    <div class="modal-content-superior">
+      <!-- Botón de cierre -->
+      <span class="close" onclick="closeModal('modalSuperior')">&times;</span>
+      <!-- Contenido del modal -->
+      <div class="contenido-superior">
+        <!-- Aquí puedes agregar tus elementos, como el botón de eventos -->
+        <button onclick="openModal('modalEventosPersonajes')">Ver Eventos</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal de Eventos de Personajes -->
+  <div id="modalEventosPersonajes" class="modal">
+    <!-- Contenido del modal -->
+    <div class="modal-content">
+      <!-- Botón de cierre -->
+      <span class="close" onclick="closeModal('modalEventosPersonajes')">&times;</span>
+      <!-- Título del modal -->
+      <h2>Eventos de Personajes</h2>
+      <!-- Lista de eventos de personajes -->
+      <div class="evento">
+        <h3>Evento 1</h3>
+        <p>Descripción del evento 1</p>
+        <button onclick="openModal('modalEvento')">Ir al Evento</button>
+      </div>
+      <hr>
+      <div class="evento">
+        <h3>Evento 2</h3>
+        <p>Descripción del evento 2</p>
+        <button onclick="irAlEvento()">Ir al Evento</button>
+      </div>
+      <!-- Agregar más eventos de personajes si es necesario -->
+    </div>
+  </div>
+
+  <!-- Modal del evento -->
+  <div id="modalEvento" class="modal">
+    <div class="modal-content-evento">
+      <span class="close" onclick="closeModal('modalEvento')">&times;</span>
+      <div class="contenido-evento">
+        <div class="texto-evento">
+          <h2>Participa en el Evento</h2>
+          <p>y consigue al personaje por Tiempo Limitado</p>
+          <!-- Barra de progreso del evento -->
+          <div class="barra-progreso">
+            <div id="progresoEvento" class="progreso"></div>
+          </div>
+          <button onclick="openModal('modalJuego')">Jugar: Encuentra los Fosiles</button>
+          <!-- Contador de Monedas Jurásicas -->
+          <p>Monedas Jurásicas: <span id="monedasJurasicas">0</span></p>
+          <!-- Botón para girar la rueda -->
+          <button onclick="girarRueda()">Girar la Rueda</button>
+        </div>
+        <div class="imagen-evento">
+          <img src="C:\Users\59901647\Downloads\Jungla Background.jpg" alt="Imagen del Evento">
+      </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <p>Temporada</p>
+
+  <!-- Modal de Temporada -->
+  <div id="modalTemporada" class="modal-jungla">
+    <!-- Contenido del modal -->
+    <div class="modal-content-temporada">
+      <!-- Contenedor para mostrar el temporizador -->
+      <div class="temporizador">
+        <p><span id="contador">0w 0d 0h</span> Finaliza: 14 Oct 24</p>
+      </div>
+      <!-- Contenedor para mostrar el nivel actual -->
+      <div class="nivel-actual">
+        <p>Nivel Actual: <span id="nivelTemporada">1</span></p>
+      </div>
+      <!-- Botón de cierre -->
+      <span class="close" onclick="closeModal('modalTemporada')">&times;</span>
+      <!-- Menú lateral de Temporada -->
+      <div class="menu-lateral">
+        <button onclick="abrirPaseTemporada()">Pase de Temporada</button>
+        <button onclick="abrirMisiones()">Misiones</button>
+      </div>
+      <!-- Contenido de Pase de Temporada -->
+      <div id="contenidoPaseTemporada" style="display: none;">
+        <!-- Aquí puedes agregar contenido específico del Pase de Temporada si es necesario -->
+        <h1>Temporada 1: Jungla</h1>
+      </div>
+      <!-- Contenido de Misiones -->
+      <div id="contenidoMisiones" style="display: none;">
+        <!-- Botón para completar la tarea -->
+        <button onclick="completarTarea()">Tarea</button>
+      </div>
+      <!-- Barra de experiencia de Temporada -->
+      <div class="barra-exp">
+        <p>Exp: <span id="expTemporada">0</span> / <span id="expSiguienteNivel">100</span></p>
+        <progress id="barraExpTemporada" value="0" max="100"></progress>
+      </div>
+      <!-- Recompensas de Temporada -->
+      <div class="recompensas-temporada">
+        <p>Recompensas de Temporada:</p>
+        <ul>
+        </ul>
+      </div>
+      <!-- Contenedor para mostrar la temática de la Jungla -->
+      <div class="tematica-jungla">
+        <img src="C:\Users\59901647\Downloads\Jungla Background.jpg" alt="Jungla Background">
+        <!-- Puedes agregar contenido adicional relacionado con la temática de la jungla -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Variables de experiencia y nivel de Temporada
+  let expActual = 0;
+  let expSiguienteNivel = 100;
+  let nivelTemporada = 1;
+
+  // Porcentaje de aumento de experiencia requerida por nivel
+  const aumentoPorNivel = 0.76;
+
+  // Fecha de finalización de la temporada (14 de octubre de 2024)
+  const fechaFinalizacion = new Date('October 14, 2024 00:00:00').getTime();
+
+  // Función para abrir el modal de Temporada
+  function openModal(id) {
+    document.getElementById(id).style.display = "block";
+  }
+
+  // Función para cerrar el modal de Temporada
+  function closeModal(id) {
+    document.getElementById(id).style.display = "none";
+  }
+
+  // Función para abrir el contenido del Pase de Temporada
+  function abrirPaseTemporada() {
+    document.getElementById('contenidoPaseTemporada').style.display = "block";
+    document.getElementById('contenidoMisiones').style.display = "none";
+  }
+
+  // Función para abrir el contenido de Misiones
+  function abrirMisiones() {
+    document.getElementById('contenidoMisiones').style.display = "block";
+    document.getElementById('contenidoPaseTemporada').style.display = "none";
+  }
+
+  // Función para completar una tarea y obtener experiencia
+  function completarTarea() {
+    // Simular obtención de experiencia
+    expActual += 10;
+    document.getElementById('expTemporada').innerText = expActual;
+
+    // Actualizar la barra de experiencia
+    actualizarBarraExp();
+
+    // Verificar si se ha alcanzado el siguiente nivel
+    if (expActual >= expSiguienteNivel) {
+      subirNivelTemporada();
+    }
+  }
+
+  // Función para subir de nivel en la Temporada
+  function subirNivelTemporada() {
+    nivelTemporada++;
+    // Aumentar la experiencia necesaria para el siguiente nivel
+    expSiguienteNivel += Math.round(expSiguienteNivel * aumentoPorNivel);
+
+    // Actualizar la barra de experiencia y el texto del siguiente nivel
+    document.getElementById('expSiguienteNivel').innerText = expSiguienteNivel;
+    actualizarBarraExp();
+
+    // Otorgar recompensa por subir de nivel
+    otorgarRecompensa(nivelTemporada);
+    // Actualizar el nivel mostrado en el contenedor
+    document.getElementById('nivelTemporada').innerText = nivelTemporada;
+  }
+
+  // Función para actualizar la barra de experiencia
+  function actualizarBarraExp() {
+    const porcentaje = (expActual / expSiguienteNivel) * 100;
+    document.getElementById('barraExpTemporada').value = porcentaje;
+  }
+
+  // Función para otorgar recompensa por subir de nivel
+  function otorgarRecompensa(nivel) {
+    const recompensa = "Recompensa de Nivel " + nivel;
+    const listaRecompensas = document.querySelector('.recompensas-temporada ul');
+    const nuevaRecompensa = document.createElement('li');
+    nuevaRecompensa.textContent = recompensa;
+    listaRecompensas.appendChild(nuevaRecompensa);
+  }
+
+  // Función para actualizar el temporizador
+  function actualizarTemporizador() {
+    // Obtener la fecha y hora actual
+    const ahora = new Date().getTime();
+    // Calcular la diferencia de tiempo entre ahora y la fecha de finalización
+    const diferencia = fechaFinalizacion - ahora;
+    // Calcular semanas, días, horas y minutos restantes
+    const semanas = Math.floor(diferencia / (1000 * 60 * 60 * 24 * 7));
+    const dias = Math.floor((diferencia % (1000 * 60 * 60 * 24 * 7)) / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+    // Mostrar el temporizador actualizado en el formato deseado
+    document.getElementById('contador').innerText = semanas + "w " + dias + "d " + horas + "h";
+  }
+
+  // Actualizar el temporizador cada segundo
+  setInterval(actualizarTemporizador, 1000);
+  </script>
+
+  <!-- Modal de Bienvenida -->
+  <div id="modalBienvenida" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modalBienvenida')">&times;</span>
+      <h2>Bienvenido al Juego</h2>
+      <p>¡Bienvenido! Para comenzar, aquí tienes algunas instrucciones:</p>
+      <p>Presiona "G" para utilizar el despertar</p>
+      <p>Presiona "Z" para activar el panel de saldo</p>
+      <p>Presiona "L" para el modo Tutorial</p>
+      <p>Presiona "E" para seleccionar un personaje</p>
+      <hr>
+      <p>Por favor ten en cuenta que el juego por el momento no se le dio tiempo para su personalizacion, danos tiempo y
+        podemos lograrlo.</p>
+      <button onclick="reproducirAudio()">Reproducir Audio</button>
+      <button onclick="showControls()">Mostrar Controles</button>
+    </div>
+  </div>
+
+  <script>
+    // Función para reproducir el audio
+  function reproducirAudio() {
+    var audio = new Audio("https://oceanandwild.000webhostapp.com/wp-content/uploads/2024/05/TRXVELER.mp3");
+    audio.loop = true;
+    audio.play();
+  }
+  </script>
+  <script>
+    // Función para abrir el modal de bienvenida al cargar la página
+window.onload = function() {
+  openModal('modalBienvenida');
+};
+
+// Función para abrir el modal
+function openModal(modalId) {
+  var modal = document.getElementById(modalId);
+  if (modal) {
+    modal.style.display = 'block';
+  }
+}
+
+// Función para cerrar el modal
+function closeModal(modalId) {
+  var modal = document.getElementById(modalId);
+  if (modal) {
+    modal.style.display = 'none';
+  }
+}
+
+// Función para mostrar los controles
+function showControls() {
+  alert('Presiona "G" para utilizar el despertar\n' +
+        'Presiona "Z" para activar el panel de saldo\n' +
+        'Presiona "L" para el modo Tutorial\n' +
+        'Presiona "E" para seleccionar un personaje');
+}
+  </script>
+
+  <!-- Modal del 8 de mayo -->
+  <div id="modalMayo8" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modalMayo8')">&times;</span>
+      <h2>Jurassic World X Los campos de Batallas Universales</h2>
+      <p>Desde hoy 8 de mayo hasta el 26 de mayo disfruta de un nuevo personaje por tiempo limitado compralo antes de
+        que se acabe el tiempo, cada habilidad cuesta bastante y el personaje en si cuesta. Nota: Si lo obtuviste pero
+        no obtuviste todas sus habilidades lo podras obtener pero tendras que esperar hasta el 10 de Julio para poder
+        obtenerlo gratis, o comprar el pack en la tienda 2 dias antes de que termine el evento </p>
+    </div>
+  </div>
+
+  <!-- Modal de Seleccionar Personajes -->
+
+
+
+
+  <!-- Modal de Seleccionar Personajes -->
+  <div id="modalPersonajes" class="modal">
+    <!-- Contenido del modal -->
+    <div class="modal-content">
+      <!-- Botón de cierre -->
+      <span class="close" onclick="closeModal('modalPersonajes')">&times;</span>
+      <!-- Título del modal -->
+      <h2>Selecciona un Personaje</h2>
+         <h1>Selección de Personaje</h1>
+    <p>Debido a un error, la sección de personajes ha sido cambiada y esta no recibirá actualizaciones.</p>
+    <p>Si quieres seleccionar otros personajes, presiona "Teletransportarse" a continuación.</p>
+    <p>Si prefieres jugar con el personaje T-Rex, presiona "Me quedaré aquí".</p>
+    <button onclick="teletransportarse()">Teletransportarse</button>
+    <button onclick="quedarmeAqui()">Me quedaré aquí</button>
+
+    <script>
+        function teletransportarse() {
+            alert('¡Teletransportación exitosa! Serás redirigido a la página de selección de personajes.');
+            window.location.href = 'personajes.html'; // Cambia "seleccion_personajes.html" por la ruta correcta
+        }
+
+        function quedarmeAqui() {
+            alert('¡Has decidido quedarte aquí y jugar con el personaje T-Rex!');
+            // Aquí puedes agregar cualquier otra lógica que necesites para cargar el juego del T-Rex
+        }
+    </script>
+      <!-- Botón para ir a la página de saldo -->
+      <button onclick="irAPaginaSaldo()">Ir a Saldo</button>
+
+      <script>
+        // Función para redirigir a la página de saldo (Saldo.html)
+function irAPaginaSaldo() {
+  window.location.href = 'Saldo.html';
+}
+      </script>
+      <!-- Barra de progreso para el desbloqueo del personaje -->
+      <progress id="barraDesbloqueo" value="0" max="100"></progress>
+      <!-- Lista de personajes disponibles -->
+      <hr>
+      <h3 class="rareza">Común</h3>
+      <ul class="personajes-list">
+        <li class="personaje" onclick="seleccionarPersonaje('Común')">???</li>
+        <li class="personaje" onclick="seleccionarPersonaje('Común')">???</li>
+        <!-- Agregar más personajes comunes si es necesario -->
+      </ul>
+      <hr>
+      <h3 class="rareza">Raro</h3>
+      <ul class="personajes-list">
+        <li class="personaje" onclick="intentarDesbloquear('Raro')">???</li>
+      </ul>
+      <hr>
+      <h3 class="rareza">Legendario</h3>
+      <ul class="personajes-list">
+        <button class="personaje" onclick="intentarDesbloquear('???')"???</button>
+      </ul>
+      <h3 class="rareza">Evento</h3>
+      <ul class="personajes-list">
+        <button onclick="intentarDesbloquear('T-Rex')">T-Rex</button>
+        <li class="personaje" onclick="seleccionarPersonaje('Raro')">???</li>
+      </ul>
+    </div>
+  </div>
+
+<script>
+// Función para intentar desbloquear el Megalodon
+function intentarDesbloquearMegalodon() {
+  // Mostrar mensaje de intento de desbloqueo
+  console.log("Intentando desbloquear el Megalodon...");
+
+  // Simular proceso de desbloqueo con una barra de progreso
+  var barraDesbloqueo = document.getElementById("barraDesbloqueo");
+  var valor = 0;
+  var interval = setInterval(function() {
+    if (valor >= 100) {
+      clearInterval(interval);
+      // Generar probabilidad de éxito del desbloqueo
+      var exito = Math.random() < 0.3; // Probabilidad del 30%
+      if (exito) {
+        console.log("¡Megalodon desbloqueado con éxito!");
+        alert("¡Has desbloqueado al Megalodon!");
+        // Lógica para permitir la selección del Megalodon desbloqueado
+        seleccionarPersonaje("Megalodon");
+      } else {
+        console.log("No se ha podido desbloquear al Megalodon.");
+        alert("Lo siento, no has podido desbloquear al Megalodon. Sigue intentándolo.");
+        // Resetear la barra de progreso
+        barraDesbloqueo.value = 0;
+      }
+    } else {
+      valor += 10; // Incremento de la barra de progreso
+      barraDesbloqueo.value = valor;
+    }
+  }, 1000); // Intervalo de actualización en milisegundos (1000 ms = 1 segundo)
+}
+
+  // Función para intentar desbloquear un personaje
+function intentarDesbloquear(personaje) {
+  // Mostrar mensaje de intento de desbloqueo
+  console.log("Intentando desbloquear el personaje: " + personaje + "...");
+
+  // Simular proceso de desbloqueo con una barra de progreso
+  var barraDesbloqueo = document.getElementById("barraDesbloqueo");
+  var valor = 0;
+  var interval = setInterval(function() {
+    if (valor >= 100) {
+      clearInterval(interval);
+      // Generar probabilidad de éxito del desbloqueo
+      var exito = Math.random() < 0.3; // Probabilidad del 30%
+      if (exito) {
+        console.log("¡Personaje desbloqueado con éxito!");
+        alert("¡Has desbloqueado a " + personaje + "!");
+        // Lógica para permitir la selección del personaje desbloqueado
+        seleccionarPersonaje(personaje);
+      } else {
+        console.log("No se ha podido desbloquear el personaje.");
+        alert("Lo siento, no has podido desbloquear a " + personaje + ". Sigue intentándolo.");
+        // Resetear la barra de progreso
+        barraDesbloqueo.value = 0;
+        // Preguntar al jugador si quiere comprar el personaje
+        var compra = confirm("¿Quieres comprar a " + personaje + " por 699 Monedas Trueno?");
+        if (compra) {
+          // Verificar si el jugador tiene suficientes Monedas Trueno
+          var saldoMonedasTrueno = parseInt(document.getElementById('saldoMonedasTrueno').innerText);
+          if (saldoMonedasTrueno >= 699) {
+            // Restar las Monedas Trueno necesarias para la compra
+            saldoMonedasTrueno -= 699;
+            document.getElementById('saldoMonedasTrueno').innerText = saldoMonedasTrueno;
+            // Permitir la selección del personaje
+            alert("¡Has comprado a " + personaje + "!");
+            seleccionarPersonaje(personaje);
+          } else {
+            // Informar al jugador que no tiene suficientes Monedas Trueno
+            alert("¡Su saldo es insuficiente para comprar a " + personaje + "!");
+            // Preguntar al jugador si desea ganar más saldo
+            var ganarMasSaldo = confirm("¿Te gustaría ganar más saldo?");
+            if (ganarMasSaldo) {
+              // Abrir el panel del saldo
+              mostrarSaldo();
+            }
+          }
+        }
+      }
+    } else {
+      valor += 10; // Incremento de la barra de progreso
+      barraDesbloqueo.value = valor;
+    }
+  }, 1000); // Intervalo de actualización en milisegundos (1000 ms = 1 segundo)
+}
+
+// Función para intentar desbloquear el T-Rex
+function intentarDesbloquearTRex() {
+  // Mostrar mensaje de intento de desbloqueo del T-Rex
+  console.log("Intentando desbloquear al T-Rex...");
+
+  // Obtener la barra de progreso del desbloqueo del T-Rex
+  var barraDesbloqueoTRex = document.getElementById("barraDesbloqueoTRex");
+  var valor = 0;
+
+  // Iniciar el intervalo para llenar la barra de progreso
+  var interval = setInterval(function() {
+    if (valor >= 100) {
+      clearInterval(interval);
+      // Lógica para determinar si se ha desbloqueado al T-Rex
+      var exito = Math.random() < 0.3; // Probabilidad del 30% de éxito
+      if (exito) {
+        console.log("¡T-Rex desbloqueado con éxito!");
+        alert("¡Has desbloqueado al T-Rex!");
+        // Lógica para permitir la selección del T-Rex
+        trexObtenido = true;
+        seleccionarPersonaje('T-Rex');
+      } else {
+        console.log("No se ha podido desbloquear al T-Rex.");
+        alert("Lo siento, no has podido desbloquear al T-Rex. Sigue intentándolo.");
+        // Resetear la barra de progreso del T-Rex
+        barraDesbloqueoTRex.value = 0;
+      }
+    } else {
+      valor += 10; // Incremento de la barra de progreso
+      barraDesbloqueoTRex.value = valor;
+    }
+  }, 1000); // Intervalo de actualización en milisegundos (1000 ms = 1 segundo)
+}
+
+// Función para seleccionar un personaje
+function seleccionarPersonaje(personaje) {
+  alert('Has seleccionado a: ' + personaje);
+  // Aquí puedes agregar la lógica para usar al personaje seleccionado
+}
+</script>
+
+
+
+
+  <!-- Modal de Pases de Juego -->
+  <div id="modalPasesJuego" class="modal">
+    <!-- Contenido del modal -->
+    <div class="modal-content">
+      <!-- Botón de cierre -->
+      <span class="close" onclick="closeModal('modalPasesJuego')">&times;</span>
+      <!-- Título del modal -->
+      <h2>Pases de Juego</h2>
+      <!-- Lista de pases de juego -->
+      <ul>
+        <li>
+          <span>T-Rex Gamepass</span>
+          <span id="estadoGamepassTrex"></span>
+          <button onclick="comprarGamepass('T-Rex')">Comprar con monedas trueno</button>
+        </li>
+        <!-- Agregar más pases de juego si es necesario -->
+      </ul>
+    </div>
+  </div>
+
+  <div id="habilidades" style="display: none;">
+    <h2 id="nombrePersonaje"></h2>
+
+    <!-- Barra para la ULTI -->
+    <progress id="barraUlti" value="0" max="100"></progress>
+
+    <!-- Habilidades antes de la ULTI -->
+    <div id="habilidadesAntesUlti">
+      <h3>Habilidades antes de la ULTI:</h3>
+      <p id="habilidadesAntesUltiTexto"></p>
+    </div>
+
+    <!-- Habilidades durante la ULTI -->
+    <div id="habilidadesDuranteUlti" style="display: none;">
+      <h3>Habilidades durante la ULTI:</h3>
+      <p id="habilidadesDuranteUltiTexto"></p>
+    </div>
+
+
+    <!-- Modal para el video de la habilidad Azul -->
+    <div id="modalVideoMilGarras" class="modal">
+      <!-- Contenido del modal -->
+      <div class="modal-content">
+        <!-- Botón de cierre -->
+        <span class="close" onclick="closeModal('modalVideoMilGarras')">&times;</span>
+        <!-- Título del modal -->
+        <h2>Mil Garras</h2>
+        <h3>El T-Rex (Jugador) tira arañazos al jugador en el rango</h3>
+        <!-- Video de la habilidad Azul -->
+        <video id="modalVideoMilGarras" width="640" height="350" controls>
+          <source src="C:\Users\59901647\Downloads\Los campos de Batallas Universales (Juego)\Mil Garras.mp4" 4
+            type="video/mp4">
+          Tu navegador no soporta el elemento de video.
+        </video>
+      </div>
+    </div>
+
+    <button id="MilGarrasButton" class="skill-button" onclick="abrirModalMilGarras()">Mil Garras</button>
+    <button id="lluviaMeteoritosButton" class="skill-button" onclick="abrirModalLluviadeMeteoritos()">Lluvia de Meteoritos</button>
+    <button id="MarcaGradualButton" class="skill-button" onclick="abrirModalMarcaGradual()">Marca Gradual</button>
+    <button id="habilidad4Button" class="skill-button" onclick="abrirModalDominioJurasico()">Dominio Jurasico</button>
+    <h1>Verdadero Sobreviviente</h1>
+    <button id="botonHabilidad1" class="skill-button" onclick="usarHabilidad(1)">Habilidad Ulti 1</button>
+    <button id="botonHabilidad2" class="skill-button" onclick="usarHabilidad(2)">Habilidad Ulti 2</button>
+    <button id="botonHabilidad3" class="skill-button" onclick="usarHabilidad(3)">Habilidad Ulti 3</button>
+    <button id="botonHabilidad4" class="skill-button" onclick="usarHabilidad(4)">Habilidad Ulti 4</button>
+
+    <div id="modalVideoDominioJurasico" class="modal">
+      <!-- Contenido del modal -->
+      <div class="modal-content">
+        <!-- Botón de cierre -->
+        <span class="close" onclick="closeModal('modalVideoDominioJurasico')">&times;</span>
+        <!-- Título del modal -->
+        <h2>Dominio Jurasico</h2>
+        <h3>Agarra al jugador y lo empuja con una bola del Mundo Jurasico, luego se crea una animacion luego el jugador
+          genera dos garras de dinosaurio y empieza a rasguñar al jugador despues de 7 segundos lo deja paralizado por 3
+          segundos.</h3>
+        <!-- Video de la habilidad Azul -->
+        <video id="modalVideoDominioJurasico" width="640" height="350" controls>
+          <source src="C:\Users\59901647\Downloads\Los campos de Batallas Universales (Juego)\Dominio Jurasico.mp4" 4
+            type="video/mp4">
+          Tu navegador no soporta el elemento de video.
+        </video>
+      </div>
+    </div>
+
+
+    <script>
+      // Función para abrir el modal de la habilidad Azul de Gojo
+function abrirModalDominioJurasico() {
+  openModal('modalVideoDominioJurasico');// Pasar el ID del modal
+}
+
+// Función para abrir el modal
+function openModal(modalId) {
+  var modal = document.getElementById(modalId);
+  if (modal) {
+    modal.style.display = 'block';
+  }
+}
+
+// Función para cerrar el modal
+function closeModal(modalId) {
+  var modal = document.getElementById(modalId);
+  if (modal) {
+    modal.style.display = 'none';
+  }
+}
+
+    </script>
+
+
+
+    <!-- Modal para el video de la habilidad Azul -->
+    <div id="modalVideoLluviadeMeteoritos" class="modal">
+      <!-- Contenido del modal -->
+      <div class="modal-content">
+        <!-- Botón de cierre -->
+        <span class="close" onclick="closeModal('modalVideoLluviadeMeteoritos')">&times;</span>
+        <!-- Título del modal -->
+        <h2>Lluvia de Meteoritos</h2>
+        <h3>Cae una lluvia de meteoritos su duracion es de 2 minutos, por cada kill que se haga durara 15 segundos mas y
+          caeran 2 meteoritos mas (Cuando se usa la habilidad caen 20 meteoritos)</h3>
+        <!-- Video de la habilidad Azul -->
+        <video id="modalVideoLluviadeMeteoritos" width="640" height="350" controls>
+          <source src="C:\Users\59901647\Downloads\Los campos de Batallas Universales (Juego)\Lluvia de Meteoritos.mp4"
+            4 type="video/mp4">
+          Tu navegador no soporta el elemento de video.
+        </video>
+      </div>
+    </div>
+
+
+    <script>
+      // Función para abrir el modal de la habilidad Azul de Gojo
+function abrirModalLluviadeMeteoritos() {
+  openModal('modalVideoLluviadeMeteoritos');// Pasar el ID del modal
+}
+
+// Función para abrir el modal
+function openModal(modalId) {
+  var modal = document.getElementById(modalId);
+  if (modal) {
+    modal.style.display = 'block';
+  }
+}
+
+// Función para cerrar el modal
+function closeModal(modalId) {
+  var modal = document.getElementById(modalId);
+  if (modal) {
+    modal.style.display = 'none';
+  }
+}
+
+    </script>
+
+
+    <script>
+      // Función para abrir el modal de la habilidad Azul de Gojo
+function abrirModalMilGarras() {
+  openModal('modalVideoMilGarras');// Pasar el ID del modal
+}
+
+// Función para abrir el modal
+function openModal(modalId) {
+  var modal = document.getElementById(modalId);
+  if (modal) {
+    modal.style.display = 'block';
+  }
+}
+
+// Función para cerrar el modal
+function closeModal(modalId) {
+  var modal = document.getElementById(modalId);
+  if (modal) {
+    modal.style.display = 'none';
+  }
+}
+
+    </script>
+
+
+    <!-- Modal para el video de la habilidad Azul -->
+    <div id="modalVideoMarcaGradual" class="modal">
+      <!-- Contenido del modal -->
+      <div class="modal-content">
+        <!-- Botón de cierre -->
+        <span class="close" onclick="closeModal('modalVideoMarcaGradual')">&times;</span>
+        <!-- Título del modal -->
+        <h2>Marca Gradual</h2>
+        <h3>Deja una marca que hace daño con el tiempo a todos los jugadores (Duracion de la Marca: 10 segundos)</h3>
+        <!-- Video de la habilidad Azul -->
+        <video id="modalVideoMarcaGradual" width="640" height="350" controls>
+          <source src="C:\Users\59901647\Downloads\Los campos de Batallas Universales (Juego)\Marca Gradual.mp4" 4
+            type="video/mp4">
+          Tu navegador no soporta el elemento de video.
+        </video>
+      </div>
+    </div>
+
+
+    <script>
+      // Función para abrir el modal de la habilidad Azul de Gojo
+function abrirModalMarcaGradual() {
+  openModal('modalVideoMarcaGradual');// Pasar el ID del modal
+}
+
+// Función para abrir el modal
+function openModal(modalId) {
+  var modal = document.getElementById(modalId);
+  if (modal) {
+    modal.style.display = 'block';
+  }
+}
+
+// Función para cerrar el modal
+function closeModal(modalId) {
+  var modal = document.getElementById(modalId);
+  if (modal) {
+    modal.style.display = 'none';
+  }
+}
+    </script>
+    <!-- Modal de eventos -->
+    <div id="modalEventos" class="modal">
+      <!-- Contenido del modal -->
+      <div class="modal-content">
+        <!-- Botón de cierre -->
+        <span class="close" onclick="closeModal('eventos')">&times;</span>
+        <!-- Título del modal -->
+        <h2>Eventos</h2>
+        <!-- Lista de eventos -->
+        <div class="evento">
+          <img src="Jurassic World.jpg" alt="Imagen del evento" style="width: 100%; max-width: 400px; margin: 0 auto;">
+          <h3>Jurassic World X Los campos de Batallas Universales</h3>
+          <p>Inicio: <span id="inicioEvento1">2 de mayo</span> - Finalización:
+            <span id="finalizacionEvento1">19 de mayo</span></p>
+          <button onclick="openModal('modalEvento')">Ir al Evento</button>
+        </div>
+        <hr>
+        <div class="evento">
+          <h3>Evento 2</h3>
+          <p>Inicio: <span id="inicioEvento2">15:00</span> - Finalización: <span id="finalizacionEvento2">17:00</span>
+          </p>
+        </div>
+        <!-- Agregar más eventos si es necesario -->
+      </div>
+    </div>
+
+
+
+    <script>
+      document.addEventListener('keydown', function(event) {
+  if (event.key === 'f' || event.key === 'F') {
+    openModal('modalEventos'); // Llama a openModal con el ID del modal de eventos
+  }
+});
+
+// Función para abrir el modal
+function openModal(modalId) {
+  var modal = document.getElementById(modalId);
+  if (modal) {
+    modal.style.display = 'block';
+  }
+}
+
+// Función para cerrar el modal
+function closeModal() {
+  var modals = document.querySelectorAll('.modal');
+  for (var i = 0; i < modals.length; i++) {
+    modals[i].style.display = 'none';
+  }
+}
+
+// Función para cerrar el modal de eventos
+function closeModalEvents() {
+  document.getElementById('modalEventos').style.display = 'none';
+}
+    </script>
+    <script>
+      // Event listener para abrir el modal al presionar la tecla "E"
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'e' || event.key === 'E') {
+    openModal('modalPersonajes');
+  }
+});
+    </script>
+
+    <div id="habilidades2" style="display: none;">
+      <h2 id="nombrePersonaje"></h2>
+
+      <!-- Barra para la ULTI -->
+      <progress id="barraUlti" value="0" max="100"></progress>
+
+      <!-- Habilidades antes de la ULTI -->
+      <div id="habilidadesAntesUlti">
+        <h3>Habilidades antes de la ULTI:</h3>
+        <p id="habilidadesAntesUltiTexto"></p>
+      </div>
+
+      <!-- Habilidades durante la ULTI -->
+      <div id="habilidadesDuranteUlti" style="display: none;">
+        <h3>Habilidades durante la ULTI:</h3>
+        <p id="habilidadesDuranteUltiTexto"></p>
+      </div>
+
+      <button id="MilGarrasButton" class="skill-button" onclick="abrirModalMilGarras()">Mil Garras</button>
+      <button id="lluviaMeteoritosButton" class="skill-button" onclick="abrirModalLluviadeMeteoritos()">Lluvia de Meteoritos</button>
+      <button id="MarcaGradualButton" class="skill-button" onclick="abrirModalMarcaGradual()">Marca Gradual</button>
+      <button id="habilidad4Button" class="skill-button" onclick="abrirModalDominioJurasico()">Dominio Jurasico</button>
+      <button id="botonHabilidad1" class="skill-button" onclick="usarHabilidad(1)">Habilidad Ulti 1</button>
+      <button id="botonHabilidad2" class="skill-button" onclick="usarHabilidad(2)">Habilidad Ulti 2</button>
+      <button id="botonHabilidad3" class="skill-button" onclick="usarHabilidad(3)">Habilidad Ulti 3</button>
+      <button id="botonHabilidad4" class="skill-button" onclick="usarHabilidad(4)">Habilidad Ulti 4</button>
+      <!-- Script JavaScript -->
+      <script>
+var ultiActivada = false; // Variable para controlar si la ulti está activada
+var tiempoRestanteUlti = 60; // Tiempo en segundos para la ulti
+var saldoYenes = 0; // Saldo inicial de Yenes
+var panelSaldoActivado = false; // Variable para controlar si el panel de saldo está activado
+var tutorialActivo = false; // Variable para controlar si el tutorial está activado
+
+// Función para seleccionar un personaje
+function seleccionarPersonaje(personaje) {
+  alert('Has seleccionado a: ' + personaje);
+  mostrarHabilidades(personaje);
+}
+
+function mostrarHabilidades(personaje) {
+    console.log('Mostrando habilidades para el personaje:', personaje);
+  // Definir las habilidades de cada personaje
+  switch (personaje) {
+    case 'T-Rex':
+      document.getElementById('nombrePersonaje').innerText = 'T-Rex:';
+      document.getElementById('habilidadesAntesUltiTexto').innerText = 'Habilidad 1, Habilidad 2';
+      document.getElementById('habilidadesDuranteUltiTexto').innerText = 'HabilidadesDuranteUlti 1, HabilidadesDuranteUlti 2, HabilidadesDuranteUlti 3, HabilidadesDuranteUlti 4';
+      document.getElementById('habilidades').style.display = 'block'; // Mostrar el div de habilidades
+      document.getElementById('habilidadesAntesUlti').style.display = 'block'; // Mostrar las habilidades antes de la ULTI
+      document.getElementById('habilidadesDuranteUlti').style.display = 'none'; // Ocultar las habilidades durante la ULTI
+      document.getElementById('habilidad1').innerText = 'Habilidad 1';
+      document.getElementById('habilidad1').setAttribute('onclick', 'usarHabilidad(1)');
+      document.getElementById('Lluvia de Meteoritos').innerText = 'Lluvia de Meteoritos';
+      document.getElementById('Lluvia de Meteoritos').setAttribute('onclick', 'usarHabilidad(2)');
+      document.getElementById('habilidad3').style.display = 'block'; // Mostrar habilidad 3
+      document.getElementById('habilidad3').innerText = 'Habilidad 3';
+      document.getElementById('habilidad3').setAttribute('onclick', 'usarHabilidad(3)');
+      document.getElementById('habilidad4').style.display = 'block'; // Mostrar habilidad 4
+      document.getElementById('habilidad4').innerText = 'Habilidad 4';
+      iniciarRecargaUlti(); // Iniciar la recarga de la ulti desde el principio
+      break;
+    case 'Megalodon':
+      document.getElementById('nombrePersonaje').innerText = 'Megalodon:';
+      document.getElementById('habilidadesAntesUltiTexto').innerText = 'Habilidad A, Habilidad B';
+      document.getElementById('habilidadesDuranteUltiTexto').innerText = 'HabilidadesDuranteUlti C, HabilidadesDuranteUlti D, HabilidadesDuranteUlti E';
+      document.getElementById('habilidades').style.display = 'block'; // Ocultar el div de habilidades del T-Rex
+      document.getElementById('habilidades2').style.display = 'none'; // Mostrar el div de habilidades del Megalodon
+      document.getElementById('habilidadesAntesUlti').style.display = 'block'; // Mostrar las habilidades antes de la ULTI
+      document.getElementById('habilidadesDuranteUlti').style.display = 'none'; // Ocultar las habilidades durante la ULTI
+      document.getElementById('habilidad1Button').innerText = 'Habilidad 1';
+      document.getElementById('habilidad1Button').setAttribute('onclick', 'usarHabilidad(1)');
+      document.getElementById('habilidad2Button').innerText = 'Habilidad 2';
+      document.getElementById('habilidad2Button').setAttribute('onclick', 'usarHabilidad(2)');
+      document.getElementById('habilidad3Button').style.display = 'block'; // Mostrar habilidad 3
+      document.getElementById('habilidad3Button').innerText = 'Habilidad 3';
+      document.getElementById('habilidad3Button').setAttribute('onclick', 'usarHabilidad(3)');
+      document.getElementById('habilidad4Button').style.display = 'block'; // Mostrar habilidad 4
+      document.getElementById('habilidad4Button').innerText = 'Habilidad 4';
+      iniciarRecargaUlti(); // Iniciar la recarga de la ulti desde el principio
+      break;
+    default:
+      break;
+  }
+}
+
+
+
+
+
+// Función para iniciar la recarga de la habilidad definitiva
+function iniciarRecargaUlti() {
+  var recargaUlti = document.getElementById('recargaUlti');
+  recargaUlti.style.width = '0%'; // Reiniciar la barra de recarga
+  recargaUlti.style.backgroundColor = 'green'; // Reiniciar color de la barra a verde
+  // Simular recarga completa de la habilidad después de 5 segundos (para fines de demostración)
+  setTimeout(function() {
+    recargaUlti.style.width = '100%';
+    ultiActivada = true; // Habilitar la ulti una vez recargada
+  }, 5000);
+}
+
+function usarHabilidad(tipoHabilidad) {
+  if (tipoHabilidad === 'duranteUlti') {
+    // Usar habilidades durante la ulti
+    document.getElementById('videoHabilidad').style.display = 'block';
+    document.getElementById('audioHabilidad').play();
+    setTimeout(function() {
+      document.getElementById('videoHabilidad').style.display = 'none';
+      iniciarTemporizadorUlti(); // Iniciar la ulti nuevamente al usar una habilidad durante la ulti
+      // Al finalizar la ulti, cambiar los botones de la ulti a las habilidades normales
+      cambiarBotones('normal');
+    }, 5000); // Ocultar el video después de 5 segundos (5000 ms)
+  } else {
+    // Si no es durante la ulti, cambiar los botones de las habilidades normales a los de la ulti
+    cambiarBotones('ulti');
+  }
+}
+
+
+// Función para cambiar los botones de habilidades
+function cambiarBotones(tipo) {
+  var habilidades = ['Habilidad 1', 'Habilidad 2', 'Habilidad 3', 'Habilidad 4'];
+  habilidades.forEach(function(habilidad, index) {
+    var boton = document.getElementById('botonHabilidad' + (index + 1));
+    if (tipo === 'normal') {
+      boton.innerText = habilidad;
+      boton.setAttribute('onclick', "usarHabilidad('" + habilidad + "')");
+    } else if (tipo === 'ulti') {
+      boton.innerText = 'Ulti';
+      boton.setAttribute('onclick', "usarHabilidad('duranteUlti')");
+    }
+  });
+}
+
+
+
+
+
+// Función para iniciar el temporizador de la ulti
+function iniciarTemporizadorUlti() {
+  var temporizador = document.getElementById('temporizadorUlti');
+  var recargaUlti = document.getElementById('recargaUlti');
+  var habilidadesAntesUlti = document.getElementById('habilidadesAntesUlti');
+  var habilidadesDuranteUlti = document.getElementById('habilidadesDuranteUlti');
+  var tiempoRestante = 45; // Duración de la habilidad definitiva de Gojo (45 segundos)
+  recargaUlti.style.backgroundColor = 'red'; // Cambiar color de la barra a rojo durante la ulti
+  var interval = setInterval(function() {
+    if (tiempoRestante <= 0) {
+      clearInterval(interval);
+      temporizador.innerText = '';
+      recargaUlti.style.backgroundColor = 'green'; // Restablecer color de la barra a verde al finalizar la ulti
+      recargaUlti.style.width = '0%'; // Restablecer la barra de recarga
+      habilidadesAntesUlti.style.display = 'block'; // Mostrar habilidades antes de la ulti
+      habilidadesDuranteUlti.style.display = 'none'; // Ocultar habilidades durante la ulti
+    } else {
+      var minutos = Math.floor(tiempoRestante / 60);
+      var segundos = tiempoRestante % 60;
+      temporizador.innerText = 'Tiempo restante de la ulti: ' + minutos + 'm ' + segundos + 's';
+      tiempoRestante--;
+    }
+  }, 1000); // Intervalo de actualización en milisegundos (1000 ms = 1 segundo)
+}
+
+
+function iniciarRecargaUlti() {
+  var recargaUlti = document.getElementById('recargaUlti');
+  if (recargaUlti) {
+    recargaUlti.style.width = '0%'; // Reiniciar la barra de recarga
+    recargaUlti.style.backgroundColor = 'green'; // Reiniciar color de la barra a verde
+    // Simular recarga completa de la habilidad después de 5 segundos (para fines de demostración)
+    setTimeout(function() {
+      recargaUlti.style.width = '100%';
+      ultiActivada = true; // Activar la ulti al completarse la carga
+    }, 5000);
+  } else {
+    console.error('El elemento recargaUlti no se encontró en la página.');
+  }
+}
+      </script>
+
+
+
+
+      </script>
+      <script src="guardarProgreso.js"></script>
+      <script src="juego.js"></script>
+      <script src="Updates.js"></script>
+</body>
+
+</html>
